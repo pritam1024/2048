@@ -5,6 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fffbe0;
+}
+
+* {
+  border: 0;
+  margin: 0;
+}
+
+.App {
+  padding-top: 40px;
 }
 
 code {
@@ -19,11 +29,58 @@ table {
 tr {
   height: 103px;
 }
+.header {
+  margin-left: 35%;
+  margin-right: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.title {
+  font-size: 60px;
+}
+
+.score-container {
+  height: 70px;
+  font-size: large;
+  font-weight: 600;
+  background-color: rosybrown;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+
+.new-game {
+  margin-left: 35%;
+  margin-right: 35%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.new-game button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #8f7a66;
+  background-color: #8f7a66;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.new-game p {
+  font-weight: bold;
+  font-size: 16px;
+}
 
 .cell {
   height: 100px;
   width: 100px;
-  background-color: #303030;
+  background-color: #878787;
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -37,7 +94,6 @@ tr {
 
 .score {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .color-2 {
@@ -82,4 +138,20 @@ tr {
 
 .color-2048 {
   background-color: blue;
+}
+
+.onGameover {
+  opacity: 0.5;
+}
+
+.game-over {
+  position: absolute;
+  color: red;
+  top: 58.5%;
+  left: calc((100% - 180px) / 2);
+  width: 160px;
+  font-size: 30px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
 }

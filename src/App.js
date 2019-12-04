@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import logo from "./logo.svg";
-import "./App.css";
 import { Row } from "./Components/Row";
 
 const App = () => {
@@ -145,7 +144,6 @@ const App = () => {
     let board = [];
     let score = 0;
 
-    // Shift all numbers to the left
     for (let r = 0; r < rotatedRight.length; r++) {
       let row = [];
       for (let c = rotatedRight[r].length - 1; c >= 0; c--) {
@@ -155,7 +153,6 @@ const App = () => {
       board.push(row);
     }
 
-    // Combine numbers and shift to left
     for (let r = 0; r < board.length; r++) {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
@@ -169,7 +166,6 @@ const App = () => {
       }
     }
 
-    // Rotate board back upright
     board = rotateLeft(board);
 
     return { board, score };
@@ -179,7 +175,6 @@ const App = () => {
     let board = [];
     let score = 0;
 
-    // Shift all numbers to the left
     for (let r = 0; r < inputBoard.length; r++) {
       let row = [];
       for (let c = inputBoard[r].length - 1; c >= 0; c--) {
@@ -189,7 +184,6 @@ const App = () => {
       board.push(row);
     }
 
-    // Combine numbers and shift to left
     for (let r = 0; r < board.length; r++) {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
@@ -211,35 +205,62 @@ const App = () => {
       const movedUp = moveUp(board);
       if (boardMoved(board, movedUp.board)) {
         const upWithRandom = placeRandom(movedUp.board);
-
-        setBoard(upWithRandom);
-        setScore(score + movedUp.score);
+        if (checkForGameOver(upWithRandom)) {
+          setBoard(upWithRandom);
+          setGameOver(true);
+        } else {
+          setBoard(upWithRandom);
+          setScore(score + movedUp.score);
+        }
       }
     } else if (direction === "right") {
       const movedRight = moveRight(board);
       if (boardMoved(board, movedRight.board)) {
         const rightWithRandom = placeRandom(movedRight.board);
-
-        setBoard(rightWithRandom);
-        setScore(score + movedRight.score);
+        if (checkForGameOver(rightWithRandom)) {
+          setBoard(rightWithRandom);
+          setGameOver(true);
+        } else {
+          setBoard(rightWithRandom);
+          setScore(score + movedRight.score);
+        }
       }
     } else if (direction === "down") {
       const movedDown = moveDown(board);
       if (boardMoved(board, movedDown.board)) {
         const downWithRandom = placeRandom(movedDown.board);
-
-        setBoard(downWithRandom);
-        setScore(score + movedDown.score);
+        if (checkForGameOver(downWithRandom)) {
+          setBoard(downWithRandom);
+          setGameOver(true);
+        } else {
+          setBoard(downWithRandom);
+          setScore(score + movedDown.score);
+        }
       }
     } else if (direction === "left") {
       const movedLeft = moveLeft(board);
       if (boardMoved(board, movedLeft.board)) {
         const leftWithRandom = placeRandom(movedLeft.board);
-
-        setBoard(leftWithRandom);
-        setScore(score + movedLeft.score);
+        if (checkForGameOver(leftWithRandom)) {
+          setBoard(leftWithRandom);
+          setGameOver(true);
+        } else {
+          setBoard(leftWithRandom);
+          setScore(score + movedLeft.score);
+        }
       }
     }
+  };
+
+  const checkForGameOver = board => {
+    let moves = [
+      boardMoved(board, moveUp(board).board),
+      boardMoved(board, moveRight(board).board),
+      boardMoved(board, moveDown(board).board),
+      boardMoved(board, moveLeft(board).board)
+    ];
+
+    return moves.includes(true) ? false : true;
   };
 
   const handleKeyDown = e => {
@@ -270,13 +291,23 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="score">Score: {score}</div>
-
-      <table>
+      <div className="header">
+        <h2 className="title">2048</h2>
+        <div className="score-container">
+          <h2 className="score">Score</h2>
+          <h2>{score}</h2>
+        </div>
+      </div>
+      <div className="new-game">
+        <p>Join the numbers and get to the 2048 tile!</p>
+        <button onClick={initializeBoard}>New Game</button>
+      </div>
+      <table className={gameOver ? "onGameover" : null}>
         {board.map((row, i) => (
           <Row key={i} row={row} />
         ))}
       </table>
+      {gameOver ? <h2 className="game-over">Game Over</h2> : null}
     </div>
   );
 };
