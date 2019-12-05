@@ -1,4 +1,4 @@
-##2048
+## 2048
 
 It is a famous gaming application built using ReactHooks and scss called 2048.
 
