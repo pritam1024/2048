@@ -43,7 +43,7 @@ tr {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
   p {
     font-weight: bold;
     font-size: 16px;
@@ -78,7 +78,7 @@ tr {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
-  animation: moveInFromBelow 2s ease-out;
+  animation: moveInFromBelow 1.5s ease-out;
 }
 
 @keyframes moveInFromBelow {
@@ -92,5 +92,17 @@ tr {
   100% {
     opacity: 1;
     transform: translate(0);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .header {
+    margin: 0;
+  }
+  .new-game {
+    margin: 0;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 30px;
   }
 }

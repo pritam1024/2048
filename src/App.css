@@ -63,7 +63,7 @@ tr {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .new-game p {
@@ -103,8 +103,8 @@ tr {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
-  -webkit-animation: moveInFromBelow 2s ease-out;
-          animation: moveInFromBelow 2s ease-out;
+  -webkit-animation: moveInFromBelow 1.5s ease-out;
+          animation: moveInFromBelow 1.5s ease-out;
 }
 
 @-webkit-keyframes moveInFromBelow {
@@ -138,6 +138,18 @@ tr {
     opacity: 1;
     -webkit-transform: translate(0);
             transform: translate(0);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .header {
+    margin: 0;
+  }
+  .new-game {
+    margin: 0;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 30px;
   }
 }
 /*# sourceMappingURL=App.css.map */

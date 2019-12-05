@@ -302,11 +302,13 @@ const App = () => {
         <p>Join the numbers and get to the 2048 tile!</p>
         <button onClick={initializeBoard}>New Game</button>
       </div>
-      <table className={gameOver ? "onGameover" : null}>
-        {board.map((row, i) => (
-          <Row key={i} row={row} />
-        ))}
-      </table>
+      <div className="table-container">
+        <table className={gameOver ? "onGameover" : null}>
+          {board.map((row, i) => (
+            <Row key={i} row={row} />
+          ))}
+        </table>
+      </div>
       {gameOver ? <h2 className="game-over">Game Over</h2> : null}
     </div>
   );
