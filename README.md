@@ -1,3 +1,13 @@
+##2048
+
+It is a famous gaming application built using ReactHooks and scss called 2048.
+
+### `Instructions to Play`
+
+The player needs to combine adjacent tiles having same value to double its value and reach 2048.
+Use keys 1 2 3 4 as left right up down respectively. 
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
