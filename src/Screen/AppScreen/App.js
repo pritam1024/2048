@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Row } from "./Components/Row/Row";
+import { Row } from "../../Components/Row/Row";
 
 const App = () => {
   const [board, setBoard] = useState([]);
@@ -310,7 +310,7 @@ const App = () => {
     return () => {
       body.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [setWinner, board, handleKeyDown]);
 
   return (
     <div className="App">

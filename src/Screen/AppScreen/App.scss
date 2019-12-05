@@ -42,8 +42,10 @@ tr {
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
-  .instructions {
+  &:hover {
     text-shadow: 1px 1px 0 black;
+  }
+  .instructions {
     color: #acf000;
     font-weight: bold;
     font-size: 16px;

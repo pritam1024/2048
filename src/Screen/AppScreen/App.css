@@ -65,8 +65,11 @@ tr {
   padding-bottom: 20px;
 }
 
-.instructions-container .instructions {
+.instructions-container:hover {
   text-shadow: 1px 1px 0 black;
+}
+
+.instructions-container .instructions {
   color: #acf000;
   font-weight: bold;
   font-size: 16px;
