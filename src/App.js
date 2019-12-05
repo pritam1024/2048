@@ -6,9 +6,10 @@ const App = () => {
   const [board, setBoard] = useState([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [winner, setWinner] = useState(false);
 
   useEffect(() => {
-    initializeBoard();
+    initializeBoard(4);
   }, []);
 
   const getEmptyPositions = board => {
@@ -39,13 +40,15 @@ const App = () => {
     return randomNumber;
   };
 
-  const initializeBoard = () => {
-    let board = [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ];
+  const initializeBoard = n => {
+    let board = [];
+    for (let i = 0; i < n; i++) {
+      let innerArr = [];
+      for (let j = 0; j < n; j++) {
+        innerArr.push(0);
+      }
+      board.push(innerArr);
+    }
     board = placeRandom(placeRandom(board));
     setBoard(board);
     setScore(0);
@@ -100,6 +103,8 @@ const App = () => {
       for (let c = board[r].length - 1; c >= 0; c--) {
         if (board[r][c] > 0 && board[r][c] === board[r][c - 1]) {
           board[r][c] = board[r][c] * 2;
+          console.log(board[r][c]);
+
           board[r][c - 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c - 1] > 0) {
@@ -127,6 +132,8 @@ const App = () => {
       for (let c = board[r].length - 1; c >= 0; c--) {
         if (board[r][c] > 0 && board[r][c] === board[r][c - 1]) {
           board[r][c] = board[r][c] * 2;
+          console.log(board[r][c]);
+
           board[r][c - 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c - 1] > 0) {
@@ -157,6 +164,8 @@ const App = () => {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
           board[r][c] = board[r][c] * 2;
+          console.log(board[r][c]);
+
           board[r][c + 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c + 1] > 0) {
@@ -188,6 +197,8 @@ const App = () => {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
           board[r][c] = board[r][c] * 2;
+          console.log(board[r][c]);
+
           board[r][c + 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c + 1] > 0) {
@@ -208,7 +219,12 @@ const App = () => {
         if (checkForGameOver(upWithRandom)) {
           setBoard(upWithRandom);
           setGameOver(true);
-        } else {
+        }
+        // else if (checkForWin(board[r][c], 2048)) {
+
+        //   setWinner(true);
+        // }
+        else {
           setBoard(upWithRandom);
           setScore(score + movedUp.score);
         }
@@ -252,6 +268,7 @@ const App = () => {
     }
   };
 
+  console.log(winner);
   const checkForGameOver = board => {
     let moves = [
       boardMoved(board, moveUp(board).board),
@@ -280,10 +297,16 @@ const App = () => {
       move("left");
     }
   };
-
+  const checkForWin = (board, value = "2048") => {
+    return JSON.stringify(board).includes(value);
+  };
   useEffect(() => {
     const body = document.querySelector("body");
-    body.addEventListener("keydown", handleKeyDown);
+    if (checkForWin(board)) {
+      setWinner(true);
+    } else {
+      body.addEventListener("keydown", handleKeyDown);
+    }
     return () => {
       body.removeEventListener("keydown", handleKeyDown);
     };
@@ -300,16 +323,26 @@ const App = () => {
       </div>
       <div className="new-game">
         <p>Join the numbers and get to the 2048 tile!</p>
-        <button onClick={initializeBoard}>New Game</button>
+        <button onClick={() => initializeBoard(4)}>New Game</button>
+      </div>
+      <div className="instructions-container">
+        <p className="instructions">
+          Use 1 2 3 4 keys as left right up down respectively
+        </p>
+        <p className="instructions">Combine same numbers to double it...</p>
+        <p className="instructions">
+          Reach <span>2048</span>!!!
+        </p>
       </div>
       <div className="table-container">
-        <table className={gameOver ? "onGameover" : null}>
+        <table className={gameOver || winner ? "onGameover" : null}>
           {board.map((row, i) => (
             <Row key={i} row={row} />
           ))}
         </table>
       </div>
       {gameOver ? <h2 className="game-over">Game Over</h2> : null}
+      {winner ? <h2 className="winner">You win</h2> : null}
     </div>
   );
 };
