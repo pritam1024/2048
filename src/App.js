@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import { Row } from "./Components/Row/Row";
 
 const App = () => {
