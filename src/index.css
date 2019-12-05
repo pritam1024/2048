@@ -39,6 +39,7 @@ tr {
 
 .title {
   font-size: 60px;
+  cursor: pointer;
 }
 
 .score-container {
@@ -50,6 +51,12 @@ tr {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.score-container:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.199);
 }
 
 .new-game {
@@ -72,9 +79,15 @@ tr {
   cursor: pointer;
 }
 
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.199);
+}
+
 .new-game p {
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .cell {
@@ -154,4 +167,19 @@ tr {
   background-color: white;
   padding: 10px;
   border-radius: 5px;
+  animation: moveInFromBelow 2s ease-out;
+}
+
+@keyframes moveInFromBelow {
+  0% {
+    opacity: 0;
+    transform: translateZ(-100%);
+  }
+  50% {
+    transform: translateZ(5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
