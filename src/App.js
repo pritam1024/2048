@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 import { Row } from "./Components/Row/Row";
 
 const App = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Cell.css";
 
 const Cell = ({ cellValue }) => {
   let color = "cell";
