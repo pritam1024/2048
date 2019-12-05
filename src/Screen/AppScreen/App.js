@@ -103,8 +103,6 @@ const App = () => {
       for (let c = board[r].length - 1; c >= 0; c--) {
         if (board[r][c] > 0 && board[r][c] === board[r][c - 1]) {
           board[r][c] = board[r][c] * 2;
-          console.log(board[r][c]);
-
           board[r][c - 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c - 1] > 0) {
@@ -132,8 +130,6 @@ const App = () => {
       for (let c = board[r].length - 1; c >= 0; c--) {
         if (board[r][c] > 0 && board[r][c] === board[r][c - 1]) {
           board[r][c] = board[r][c] * 2;
-          console.log(board[r][c]);
-
           board[r][c - 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c - 1] > 0) {
@@ -150,7 +146,6 @@ const App = () => {
     let rotatedRight = rotateRight(inputBoard);
     let board = [];
     let score = 0;
-
     for (let r = 0; r < rotatedRight.length; r++) {
       let row = [];
       for (let c = rotatedRight[r].length - 1; c >= 0; c--) {
@@ -164,8 +159,6 @@ const App = () => {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
           board[r][c] = board[r][c] * 2;
-          console.log(board[r][c]);
-
           board[r][c + 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c + 1] > 0) {
@@ -174,9 +167,7 @@ const App = () => {
         }
       }
     }
-
     board = rotateLeft(board);
-
     return { board, score };
   };
 
@@ -197,8 +188,6 @@ const App = () => {
       for (let c = 0; c < board.length; c++) {
         if (board[r][c] > 0 && board[r][c] === board[r][c + 1]) {
           board[r][c] = board[r][c] * 2;
-          console.log(board[r][c]);
-
           board[r][c + 1] = 0;
           score += board[r][c];
         } else if (board[r][c] === 0 && board[r][c + 1] > 0) {
@@ -219,12 +208,7 @@ const App = () => {
         if (checkForGameOver(upWithRandom)) {
           setBoard(upWithRandom);
           setGameOver(true);
-        }
-        // else if (checkForWin(board[r][c], 2048)) {
-
-        //   setWinner(true);
-        // }
-        else {
+        } else {
           setBoard(upWithRandom);
           setScore(score + movedUp.score);
         }
@@ -268,7 +252,6 @@ const App = () => {
     }
   };
 
-  console.log(winner);
   const checkForGameOver = board => {
     let moves = [
       boardMoved(board, moveUp(board).board),
@@ -276,7 +259,6 @@ const App = () => {
       boardMoved(board, moveDown(board).board),
       boardMoved(board, moveLeft(board).board)
     ];
-
     return moves.includes(true) ? false : true;
   };
 
@@ -286,7 +268,6 @@ const App = () => {
     const right = 50;
     const up = 51;
     const down = 52;
-
     if (keycode === up) {
       move("up");
     } else if (keycode === right) {
@@ -297,9 +278,11 @@ const App = () => {
       move("left");
     }
   };
+
   const checkForWin = (board, value = "2048") => {
     return JSON.stringify(board).includes(value);
   };
+
   useEffect(() => {
     const body = document.querySelector("body");
     if (checkForWin(board)) {
